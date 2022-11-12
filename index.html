@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Idle/Incremental game">
+    <meta name="author" content="Leonardo Vargas Coelho">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Idle Balcksmith</title>
+
+
+</head>
+
+<body>
+    <div class="content unselectable">
+        <div class="menus">
+            <div class="main">
+                <button id="smith">Smith Weapons</button>
+                <button id="visit">Visit Marketplace</button>
+                <button id="save" onclick="saveGame();">Save Game</button>
+                <button id="reset" onclick="resetGame();">Reset Game</button>
+                <button id="load" onclick="loadGame();">Load Game</button>
+            </div>
+            <div class="marketplace">
+                <div class="sellButtons">
+                    <button id="sell1">Sell "1" Weapon</button>
+                    <button id="sell10">Sell "10" Weapons</button>
+                    <button id="sell100">Sell "100" Weapons</button>
+                    <button id="sellAll">Sell All Weapons</button>
+
+                </div>
+                <div class="upgrades">
+                    <button id="autoSmith">Buy [1] Auto Smith - 100$ -</button>
+                    <button id="coals">Buy [1] Coal - 500$ -</button>
+                </div>
+                <div class="items">
+                    <button id="buyPickaxe">Buy [1] Pickaxe - 100$ -</button>
+                </div>
+                <button id="return">Return</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="inventory unselectable" style="font-family:'EB Garamond', 'serif';">
+        <p>Ctrl+S to save</p>
+        <p id="money">Money: $0</p>
+        <p id="weapons">You now have 0 weapons in stock.</p>
+        <p id="pickaxes"></p>
+    </div>
+    <!-- scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
