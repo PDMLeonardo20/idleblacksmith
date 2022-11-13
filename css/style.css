@@ -1,21 +1,46 @@
     @import url('https://fonts.googleapis.com/css2?family=Cardo&family=Cinzel:wght@600&family=Cormorant+Garamond:wght@300&family=EB+Garamond:wght@500&family=Libre+Baskerville&display=swap');
-
-    .inventory {
+    .content{
         position: fixed;
+        width: 100%;
+    }
+    .main{
+        width: 75%;
+        float: left;
+        background-color: rgb(133, 131, 131);
+        border-radius: 12px;
+        border-style: groove;
+        border-color: rgb(163, 103, 25);
+        padding: 10px;
+    }
+
+    .anvil{
+        background-color: rgb(133, 131, 131);
+        width: fit-content;
+        margin-top: 150px;
+        margin-left: 35%;
+        
+    }
+    .inventory {
         bottom: 0;
         width: 250px;
-        height: 200px;
+        height: 100%;
         overflow: scroll;
         background-color: rgb(187, 187, 187);
         border-radius: 13px 13px 0px 0px ;
         border-style: ridge;
         border-color: rgb(155, 75, 0);
+        float: right;
     }
     
     .marketplace {
         display: none;
-        height: 400px;
+        width: 80%;
+        height: 600px;
         overflow: scroll;
+        background-color: rgb(133, 131, 131);
+        border-radius: 12px;
+        border-style: groove;
+        border-color: rgb(155, 75, 0);
     }
     
     .sellButtons {
@@ -28,6 +53,20 @@
         display: grid;
         grid-template-columns: repeat(1, 160px);
         margin-bottom: 10px;
+        background-color: rgb(163, 103, 25);
+        border-style: ridge;
+        border-color: rgb(155, 75, 0);
+        border-radius: 10px;
+    }
+
+    .items{
+        display: grid;
+        margin-bottom: 10px;
+        grid-template-columns: repeat(1,300px);
+        background-color: rgb(163, 103, 25);
+        border-radius: 10px;
+        border-style: ridge;
+        border-color: rgb(155, 75, 0);
     }
 
     
@@ -46,7 +85,7 @@
         background-color: darkgrey;
         font-size: 20px;
         font-family: 'EB Garamond', 'serif';
-        border-radius: 8px;
+        border-radius: 12px;
         margin: 6px;
         border-color: rgb(155, 75, 0);
     }

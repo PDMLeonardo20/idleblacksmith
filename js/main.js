@@ -2,6 +2,8 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
     var weapons = 0;
     var money = 0;
     var weaponPlus = 1;
+    var weaponsPs = 0;
+    
 
     var pickaxes = 0;
     var pickaxePrice = 100;
@@ -19,22 +21,33 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
     var hammerPrice = 750;
     var hammerPlus = 0;
 
+    var grindstones = 0;
+    var grindstonePrice = 4500;
+    var grindstonePlus = 0;
+
+    var tanningRack = 0;
+    var tanningRackPrice = 9000;
+    var tanningRackPlus = 0;
+
     var menu;
-
-
-
-
     //intervalo do upgrade de auto weapon
     setInterval(function() {
         weapons += autoWeaponPlus;
         weapons += coalPlus;
+        weapons += grindstonePlus;
+        
         changeInventory();
         changeMarket();
     }, 1000);
+
+    setInterval(function(){
+        $("#scorePs").html(weaponsPs+ " weapons per second");
+    },100);
     //clicou, forjou
     $("#smith").click(function() {
         weapons += weaponPlus;
         weapons += pickaxePlus;
+        weapons += hammerPlus;
         changeInventory();
         changeMarket();
     });
@@ -82,8 +95,9 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
         if (money >= autoSmithPrice) {
             money -= autoSmithPrice;
             autoWeaponPlus++;
+            weaponsPs++;
             autoSmithPrice = Math.ceil(autoSmithPrice * 1.10);
-            $("#autoSmith").html("Buy [1] Auto Smith - " + autoSmithPrice + " - ");
+            $("#autoSmith").html("Buy [1] Auto Smith - " + autoSmithPrice + "$ - ");
             changeInventory();
             changeMarket();
         }
@@ -93,9 +107,23 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
         if (money >= coalPrice) {
             money -= coalPrice;
             coalPlus += 5;
+            weaponsPs += 5;
             coals++;
             coalPrice = Math.ceil(coalPrice * 1.10);
-            $("#coals").html("Buy [1] Auto Smith - " + coalPrice + " - ");
+            $("#coals").html("Buy [1] Auto Smith - " + coalPrice + "$ - ");
+            changeInventory();
+            changeMarket();
+        }
+    });
+
+    $("#grindstones").click(function(){
+        if(money >= grindstonePrice){
+            money -= grindstonePrice;
+            grindstonePlus += 20;
+            weaponsPs += 20;
+            grindstones++;
+            grindstonePrice = Math.ceil(grindstonePrice * 1.10);
+            $("#grindstones").html("Buy [1] Grindstone - " + grindstonePrice + "$ - ");
             changeInventory();
             changeMarket();
         }
@@ -113,7 +141,7 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             pickaxePlus += 2;
             pickaxes++;
             pickaxePrice = Math.ceil(pickaxePrice * 1.10);
-            $("#buyPickaxe").html("Buy [1] Pickaxe - " + pickaxePrice + " -");
+            $("#buyPickaxe").html("Buy [1] Pickaxe - " + pickaxePrice + "$ -");
             changeInventory();
             changeMarket();
         }
@@ -125,11 +153,26 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             hammerPlus += 7;
             hammer++;
             hammerPrice = Math.ceil(hammerPrice * 1.10);
-            $("#buyHammer").html("Buy [1] Steel Hammer - "+hammerPrice+" -");
+            $("#buyHammer").html("Buy [1] Steel Hammer - " + hammerPrice + "$ -");
             changeInventory();
             changeMarket();
         }
     });
+
+    $("#buyRack").click(function(){
+        if(money >= tanningRackPrice){
+            money -= tanningRackPrice;
+            tanningRackPlus += 30;
+            tanningRack++;
+            tanningRackPrice = Math.ceil(tanningRackPrice * 1.10);
+            $("#buyRack").html("Buy [1] Tanning Rack - " + tanningRackPrice + "$ -");
+            changeInventory();
+            changeMarket();
+        }
+    });
+
+
+    
 
     //Funções que trocam de abas
     $("#visit").click(function() {
@@ -143,12 +186,12 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
 
     //função que muda o inventario
     function changeInventory() {
-        $("#money").html("Money: $" + money);
+        $("#money").html("Money: $" + money.toFixed(1));
 
         if (weapons == 1) {
-            $("#weapons").html("You now own " + weapons + " weapon.");
+            $("#weapons").html("You now own " + weapons.toFixed(1) + " weapon.");
         } else {
-            $("#weapons").html("You now own " + weapons + " weapons.");
+            $("#weapons").html("You now own " + weapons.toFixed(1) + " weapons.");
         }
 
 
@@ -164,10 +207,22 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             $("#coal").html("You now own " + coals + " coals.");
         }
 
-        if( hammer >= 1){
-            $("#hammers").html("You now own "+hammer+" hammer.");
+        if( hammer == 1){
+            $("#hammers").html("You now own " + hammer + " hammer.");
         }else{
-            $("#hammers").html("You now own "+hammer+" hammers.");
+            $("#hammers").html("You now own " + hammer + " hammers.");
+        }
+
+        if( grindstones == 1){
+            $("#grindstone").html("You now own " + grindstones + " grindstone.");
+        }else{
+            $("#grindstone").html("You now own " + grindstones + " grindstones.");
+        }
+
+        if( tanningRack == 1){
+            $("#tanningRack").html("You now own " + tanningRack + " tanning rack.");
+        }else{
+            $("#tanningRack").html("You now own " + tanningRack + " tanning racks.");
         }
 
     };
@@ -199,32 +254,44 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
         //mostra os itens se o preço for igual ou maior que o tanto de dinheiro q tu tem
         if (money >= autoSmithPrice) {
             $("#autoSmith").css("display", "block");
-            $("#autoSmith").html("Buy [1] Auto Smith - " + autoSmithPrice + " -")
+            $("#autoSmith").html("Buy [1] Auto Smith - " + autoSmithPrice + "$ -")
         } else {
             $("#autoSmith").css("display", "none");
         }
 
         if (money >= pickaxePrice) {
             $("#buyPickaxe").css("display", "block");
-            $("#buyPickaxe").html("Buy [1] Pickaxe - " + pickaxePrice + " -");
+            $("#buyPickaxe").html("Buy [1] Pickaxe - " + pickaxePrice + "$ -");
         } else {
             $("#buyPickaxe").css("display", "none");
         }
 
         if (money >= coalPrice) {
             $("#coals").css("display", "block");
-            $("#coals").html("Buy [1] Coal - " + coalPrice + " -");
+            $("#coals").html("Buy [1] Coal - " + coalPrice + "$ -");
         } else {
             $("#coals").css("display", "none");
         }
 
         if(money >= hammerPrice){
             $("#buyHammer").css("display","block");
-            $("#buyHammer").html("Buy Steel Hammer [1] - "+hammerPrice+" -");
+            $("#buyHammer").html("Buy Steel Hammer [1] - " + hammerPrice + "$ -");
         }else{
             $("#buyHammer").css("display","none");
         }
+        if(money >= grindstonePrice){
+            $("#grindstones").css("display","block");
+            $("#grindstones").html("Buy Grindstone [1] - " + grindstonePrice + "$ -");
+        }else{
+            $("#grindstones").css("display","none");
+        }
 
+        if(money >= tanningRackPrice){
+            $("#buyRack").css("display","block");
+            $("#buyRack").html("Buy Tanning Rack [1] - " + tanningRackPrice + "$ -");
+        }else{
+            $("#buyRack").css("display","none");
+        }
 
     };
     // função que troca entre os menus
@@ -237,6 +304,7 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
     function saveGame(){
         var gameSave = {
             weaponsSave: weapons,
+            weaponsPsSave: weaponsPs,
             moneySave: money,
             weaponPlusSave: weaponPlus,
             pickaxesSave: pickaxes,
@@ -250,13 +318,21 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             coalPriceSave: coalPrice,
             hammerSave: hammer,
             hammerPlusSave: hammerPlus,
-            hammerPriceSave:hammerPrice
+            hammerPriceSave:hammerPrice,
+            grindstonesSave: grindstones,
+            grindstonePriceSave:grindstonePrice,
+            grindstonePlusSave:grindstonePlus,
+            tanningRackSave: tanningRack,
+            tanningRackPlusSave:tanningRackPlus,
+            tanningRackPriceSave:tanningRackPrice
+
         };
         localStorage.setItem("gameSave", JSON.stringify(gameSave));
     };
     $("#save").click(function(){
         var gameSave = {
             weaponsSave: weapons,
+            weaponsPsSave: weaponsPs,
             moneySave: money,
             weaponPlusSave: weaponPlus,
             pickaxesSave: pickaxes,
@@ -270,7 +346,13 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             coalPriceSave: coalPrice,
             hammerSave: hammer,
             hammerPlusSave: hammerPlus,
-            hammerPriceSave:hammerPrice
+            hammerPriceSave:hammerPrice,
+            grindstonesSave: grindstones,
+            grindstonePriceSave:grindstonePrice,
+            grindstonePlusSave:grindstonePlus,
+            tanningRackSave: tanningRack,
+            tanningRackPlusSave:tanningRackPlus,
+            tanningRackPriceSave:tanningRackPrice
         };
         localStorage.setItem("gameSave", JSON.stringify(gameSave));
     });
@@ -280,6 +362,7 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
         var savedGame = JSON.parse(localStorage.getItem("gameSave"));
         if (localStorage.getItem("gameSave") !== null) {
             if (typeof savedGame.weaponsSave !== "undefined") weapons = savedGame.weaponsSave;
+            if (typeof savedGame.weaponsPsSave !== "undefined") weaponsPs = savedGame.weaponsPsSave;
             if (typeof savedGame.moneySave !== "undefined") money = savedGame.moneySave;
             if (typeof savedGame.weaponPlusSave !== "undefined") weaponPlus = savedGame.weaponPlusSave;
             if (typeof savedGame.pickaxesSave !== "undefined") pickaxes = savedGame.pickaxesSave;
@@ -294,6 +377,12 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             if (typeof savedGame.hammerPriceSave !== "undefined") hammerPrice = savedGame.hammerPriceSave;
             if (typeof savedGame.hammerSave !== "undefined") hammer = savedGame.hammerSave;
             if (typeof savedGame.hammerPlusSave !== "undefined") hammerPlus = savedGame.hammerPlusSave;
+            if (typeof savedGame.grindstonesSave !== "undefined") grindstones = savedGame.grindstonesSave;
+            if (typeof savedGame.grindstonePlusSave !== "undefined") grindstonePlus = savedGame.grindstonePlusSave;
+            if (typeof savedGame.grindstonePriceSave !== "undefined") grindstonePrice = savedGame.grindstonePriceSave;
+            if (typeof savedGame.tanningRackSave !== "undefined") tanningRack = savedGame.tanningRackSave;
+            if (typeof savedGame.tanningRackPlusSave !== "undefined") tanningRackPlus = savedGame.tanningRackPlusSave;
+            if (typeof savedGame.tanningRackPriceSave !== "undefined") tanningRackPrice = savedGame.tanningRackPriceSave;
         }
     }
     //reseta o jogo
