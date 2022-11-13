@@ -20,9 +20,9 @@
             <div class="main">
                 <button id="smith">Smith Weapons</button>
                 <button id="visit">Visit Marketplace</button>
-                <button id="save" onclick="saveGame();">Save Game</button>
-                <button id="reset" onclick="resetGame();">Reset Game</button>
-                <button id="load" onclick="loadGame();">Load Game</button>
+                <button id="save">Save Game</button>
+                <button id="reset">Reset Game</button>
+                
             </div>
             <div class="marketplace">
                 <div class="sellButtons">
@@ -33,11 +33,14 @@
 
                 </div>
                 <div class="upgrades">
+                    <p id="titleU" style="font-family: 'EB Garamond','serif';">Upgrades</p>
                     <button id="autoSmith">Buy [1] Auto Smith - 100$ -</button>
                     <button id="coals">Buy [1] Coal - 500$ -</button>
                 </div>
                 <div class="items">
+                    <p id="titleI" style="font-family: 'EB Garamond','serif';">Items</p>
                     <button id="buyPickaxe">Buy [1] Pickaxe - 100$ -</button>
+                    <button id="buyHammer">Buy [1] Steel Hammer - 750$ -</button>
                 </div>
                 <button id="return">Return</button>
             </div>
@@ -45,10 +48,11 @@
     </div>
 
     <div class="inventory unselectable" style="font-family:'EB Garamond', 'serif';">
-        <p>Ctrl+S to save</p>
-        <p id="money">Money: $0</p>
-        <p id="weapons">You now have 0 weapons in stock.</p>
-        <p id="pickaxes"></p>
+        <p id="money" style="margin: 8px;">Money: $0</p>
+        <p id="weapons" style="margin: 8px;">You now have 0 weapons in stock.</p>
+        <p id="pickaxes" style="margin: 8px;"></p>
+        <p id="coal" style="margin: 8px;"></p>
+        <p id="hammers" style="margin: 8px;"></p>
     </div>
     <!-- scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

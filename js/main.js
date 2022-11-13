@@ -15,6 +15,10 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
     var coalPrice = 500;
     var coalPlus = 0;
 
+    var hammer = 0;
+    var hammerPrice = 750;
+    var hammerPlus = 0;
+
     var menu;
 
 
@@ -115,6 +119,18 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
         }
     });
 
+    $("#buyHammer").click(function(){
+        if(money >= hammerPrice){
+            money -= hammerPrice;
+            hammerPlus += 7;
+            hammer++;
+            hammerPrice = Math.ceil(hammerPrice * 1.10);
+            $("#buyHammer").html("Buy [1] Steel Hammer - "+hammerPrice+" -");
+            changeInventory();
+            changeMarket();
+        }
+    });
+
     //Funções que trocam de abas
     $("#visit").click(function() {
         menu = switchMenu("marketplace");
@@ -140,6 +156,18 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             $("#pickaxes").html("You now own " + pickaxes + " pickaxe.");
         } else {
             $("#pickaxes").html("You now own " + pickaxes + " pickaxes.");
+        }
+
+        if (coals == 1){
+            $("#coal").html("You now own " + coals + " coal.");
+        } else {
+            $("#coal").html("You now own " + coals + " coals.");
+        }
+
+        if( hammer >= 1){
+            $("#hammers").html("You now own "+hammer+" hammer.");
+        }else{
+            $("#hammers").html("You now own "+hammer+" hammers.");
         }
 
     };
@@ -190,6 +218,13 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             $("#coals").css("display", "none");
         }
 
+        if(money >= hammerPrice){
+            $("#buyHammer").css("display","block");
+            $("#buyHammer").html("Buy Steel Hammer [1] - "+hammerPrice+" -");
+        }else{
+            $("#buyHammer").css("display","none");
+        }
+
 
     };
     // função que troca entre os menus
@@ -199,7 +234,7 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
         return menu;
     };
     //Salva o jogo
-    function saveGame() {
+    function saveGame(){
         var gameSave = {
             weaponsSave: weapons,
             moneySave: money,
@@ -212,10 +247,33 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             weaponPriceSave: weaponPrice,
             coalSave: coals,
             coalPlusSave: coalPlus,
-            coalPriceSave: coalPrice
+            coalPriceSave: coalPrice,
+            hammerSave: hammer,
+            hammerPlusSave: hammerPlus,
+            hammerPriceSave:hammerPrice
         };
         localStorage.setItem("gameSave", JSON.stringify(gameSave));
-    }
+    };
+    $("#save").click(function(){
+        var gameSave = {
+            weaponsSave: weapons,
+            moneySave: money,
+            weaponPlusSave: weaponPlus,
+            pickaxesSave: pickaxes,
+            pickaxePriceSave: pickaxePrice,
+            pickaxePlusSave: pickaxePlus,
+            autoWeaponPlusSave: autoWeaponPlus,
+            autoSmithPriceSave: autoSmithPrice,
+            weaponPriceSave: weaponPrice,
+            coalSave: coals,
+            coalPlusSave: coalPlus,
+            coalPriceSave: coalPrice,
+            hammerSave: hammer,
+            hammerPlusSave: hammerPlus,
+            hammerPriceSave:hammerPrice
+        };
+        localStorage.setItem("gameSave", JSON.stringify(gameSave));
+    });
 
     //carrega o jogo
     function loadGame() {
@@ -233,16 +291,19 @@ $(document).ready(function() { //no que tu abre a pagina, carrega tudo isso
             if (typeof savedGame.coalSave !== "undefined") coals = savedGame.coalSave;
             if (typeof savedGame.coalPlusSave !== "undefined") coalPlus = savedGame.coalPlusSave;
             if (typeof savedGame.coalPriceSave !== "undefined") coalPrice = savedGame.coalPriceSave;
+            if (typeof savedGame.hammerPriceSave !== "undefined") hammerPrice = savedGame.hammerPriceSave;
+            if (typeof savedGame.hammerSave !== "undefined") hammer = savedGame.hammerSave;
+            if (typeof savedGame.hammerPlusSave !== "undefined") hammerPlus = savedGame.hammerPlusSave;
         }
     }
     //reseta o jogo
-    function resetGame() {
+    $("#reset").click(function(){
         if (confirm("Are you sure you want to reset your progress?")) {
             var gameSave = {};
             localStorage.setItem("gameSave", JSON.stringify(gameSave));
             location.reload();
         }
-    }
+    });
 
     //atalho pra salvar
     document.addEventListener("keydown", function(event) {
