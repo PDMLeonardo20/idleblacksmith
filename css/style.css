@@ -69,6 +69,54 @@
         border-color: rgb(155, 75, 0);
     }
 
+    #bonus{
+        display: grid;
+        margin-bottom: 10px;
+        grid-template-columns: repeat(1,300px);
+        background-color: rgb(163, 103, 25);
+        border-radius: 10px;
+        border-style: ridge;
+        border-color: rgb(155, 75, 0);
+    }
+
+    #legacy{
+        font-size: 20px;
+        font-family: 'EB Garamond','serif';
+        background-color: antiquewhite;
+        float: right;
+        margin: 6px;
+        border-radius: 12px;
+        border-style: groove;
+        border-color: rgb(155, 75, 0);
+        padding: 6px;
+    }
+
+    .stats{
+        display: none;
+        background-color: rgb(163, 103, 25);
+        border-radius: 20px;
+        border-style: ridge;
+        border-color: rgb(155, 75, 0);
+        overflow: scroll;
+        width: 80%;
+        height: 600px;
+    }
+
+    .info{
+        background-color: rgb(189, 189, 189);
+        width: 70%;
+        overflow: scroll;
+        border-radius: 8px;
+        border-style: groove;
+        border-color: rgb(155, 75, 0);
+    }
+
+    .info p{
+        font-family: 'EB Garamond', 'serif';
+        font-size: 20px;
+        margin: 8px;
+    }
+
     
     .unselectable {
         -webkit-user-select: none;
